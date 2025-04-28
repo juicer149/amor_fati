@@ -1,0 +1,9 @@
+type: training
+duration_weight: 1
+description: resistance strenght training
+muscle_groups: [legs, back, chest, arms]  # skulle kunna specificera ännu mer
+# ex running muscles: [foot, calves etc], upperbody_strenght[], bodybuilding[]
+# and then have different weights for diffrent types of focus, even recommended
+# workouts and so on, maybe even if you choose running muscles then can choose
+# between, running techniqes, running power, pain in hip, pain i achilles,
+# and so on
