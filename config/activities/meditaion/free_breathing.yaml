@@ -1,0 +1,9 @@
+type: meditation
+description: Free breathing, no specific pattern
+primary_focus: minutes
+units:
+  minutes:
+    weight: 1.0
+requirements:
+  avg_hr: optional
+  avg_breath_per_min: optional

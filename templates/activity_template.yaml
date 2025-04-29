@@ -1,0 +1,9 @@
+type: your_type_here
+description: Description of the activity.
+primary_focus: your_primary_focus_here
+units:
+  your_unit_here:
+    weight: 1.0
+requirements:
+  your_requirement_here: optional
+
