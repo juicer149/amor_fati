@@ -8,7 +8,43 @@ Projektet är under aktiv utveckling och kommer att utvecklas i flera större ve
 
 ## Projektstruktur
 
-amor_fati/ ├── config/activities/ # YAML-filer som definierar aktiviteter ├── src/amorfati/ # Applikationskod │ ├── core/ # Kärnmodeller (Activity, Factory etc) │ ├── features/ # Funktionalitet som score-kalkylering │ ├── storage/ # Hantering av data/repository │ ├── utils/ # Hjälpmoduler som YAML-hantering │ └── cli/ # Command Line Interface (CLI) ├── templates/ # Mallar för att skapa nya YAML-aktiviteter ├── tests/ # Enkla tester för kodbasen ├── Makefile # Hjälper till att köra återkommande kommandon └── project.toml # (för framtida verktyg som Poetry)
+## Projektstruktur
+
+amor_fati/
+├── config/activities/                # YAML-filer som definierar aktiviteter
+│   ├── alcohol.yaml
+│   ├── cold_shower.yaml
+│   ├── meditation/
+│   │   └── free_breathing.yaml
+│   ├── sauna.yaml
+│   └── training/
+│       ├── mobility.yaml
+│       ├── prehab.yaml
+│       ├── strenght_training.yaml
+│       └── trail_running.yaml
+├── src/amorfati/                     # Applikationskod
+│   ├── core/                         # Kärnmodeller (Activity, Factory etc)
+│   │   ├── activity.py
+│   │   └── factory.py
+│   ├── features/                     # Funktionalitet som score-kalkylering
+│   │   └── score_calculator.py
+│   ├── storage/                      # Hantering av data/repository
+│   │   └── repository.py
+│   ├── utils/                        # Hjälpmoduler som YAML-hantering
+│   │   ├── __pycache__/
+│   │   ├── create_activity.py
+│   │   ├── loader.py
+│   │   └── yaml_handler.py
+│   └── cli/                          # Command Line Interface (CLI)
+│       └── main.py
+│
+├── templates/                        # Mallar för att skapa nya YAML-aktiviteter
+│   └── activity_template.yaml
+├── tests/                            # Enkla tester för kodbasen
+│   └── test_activity.py
+├── Makefile                          # Hjälper till att köra återkommande kommandon
+├── project.toml                      # För framtida verktyg som Poetry
+└── README.md                         # Dokumentation av projektet
 
 
 Planerade större versioner
