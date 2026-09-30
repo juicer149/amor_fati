@@ -1,11 +1,17 @@
-.PHONY: create-activity run tests
+PYTHONPATH := src
+PYTHON := python3
+
+.PHONY: create-activity run test check
 
 create-activity:
-	python3 -m amorfati.utils.create_activity
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m amorfati.utils.create_activity
 
 run:
-	python3 -m amorfati.cli.main
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m amorfati.cli.main
 
-tests:
-	pytest tests
+test:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m unittest discover -v
 
+check:
+	$(PYTHON) -m compileall -q src tests
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m unittest discover -v

@@ -1,65 +1,101 @@
 # Amor Fati
 
-Amor Fati är ett personligt projekt som syftar till att skapa ett system för att logga och vikta aktiviteter över tid, baserat på deras inverkan på personlig utveckling och välmående.
+A personal activity-tracking experiment from 2025 and the second project in my
+Amor Fati project line.
 
-Projektet är under aktiv utveckling och kommer att utvecklas i flera större versioner, där 1.0 fokuserar på grundläggande funktionalitet.
+This project was a restart of an earlier terminal-based routine tracker. The
+main architectural experiment was moving activity definitions out of hardcoded
+Python logic and into YAML configuration files.
 
----
+It also introduced a `src/` package layout and separate domain objects for
+activities and logged activity occurrences.
 
-## Projektstruktur
+## What was implemented
 
-## Projektstruktur
+The functional core consists of:
 
+- `Activity` — loads activity definitions from YAML
+- `ActivityBit` — represents one occurrence of an activity
+- `ActivityCatalog` — discovers and loads activities from the config directory
+- YAML-based activity definitions
+- weighted scoring for unit-based activities
+- simple scoring for boolean activities
+- a YAML helper and activity-template utility
+
+Some planned modules, including the CLI, repository and separate score
+calculator, were created as placeholders but were never implemented.
+
+## Project structure
+
+```text
 amor_fati/
-├── config/activities/                # YAML-filer som definierar aktiviteter
-│   ├── alcohol.yaml
-│   ├── cold_shower.yaml
-│   ├── meditation/
-│   │   └── free_breathing.yaml
-│   ├── sauna.yaml
-│   └── training/
-│       ├── mobility.yaml
-│       ├── prehab.yaml
-│       ├── strenght_training.yaml
-│       └── trail_running.yaml
-├── src/amorfati/                     # Applikationskod
-│   ├── core/                         # Kärnmodeller (Activity, Factory etc)
-│   │   ├── activity.py
-│   │   └── factory.py
-│   ├── features/                     # Funktionalitet som score-kalkylering
-│   │   └── score_calculator.py
-│   ├── storage/                      # Hantering av data/repository
-│   │   └── repository.py
-│   ├── utils/                        # Hjälpmoduler som YAML-hantering
-│   │   ├── __pycache__/
-│   │   ├── create_activity.py
-│   │   ├── loader.py
-│   │   └── yaml_handler.py
-│   └── cli/                          # Command Line Interface (CLI)
-│       └── main.py
-│
-├── templates/                        # Mallar för att skapa nya YAML-aktiviteter
-│   └── activity_template.yaml
-├── tests/                            # Enkla tester för kodbasen
-│   └── test_activity.py
-├── Makefile                          # Hjälper till att köra återkommande kommandon
-├── project.toml                      # För framtida verktyg som Poetry
-└── README.md                         # Dokumentation av projektet
+├── config/
+│   └── activities/
+├── src/
+│   └── amorfati/
+│       ├── cli/
+│       ├── core/
+│       │   ├── activity.py
+│       │   ├── activity_bit.py
+│       │   └── catalog.py
+│       ├── features/
+│       ├── storage/
+│       └── utils/
+├── templates/
+├── tests/
+├── Makefile
+└── README.md
+```
 
+## Verification
 
-Planerade större versioner
+Run:
 
-    v1.0: Grundfunktionalitet (logging och beräkning av aktivitetspoäng)
+```bash
+make check
+```
 
-    v1.5: Förbättrad CLI och intern logik, utökad testning
+This compiles the source and runs the restored test suite.
 
-    v2.0: Dynamiska aktiviteter, baserade på fysiologisk och emotionell data
+The tests cover:
 
-    v3.0: AI-modul för mönsterigenkänning och adaptiva rekommendationer
+- loading unit-based activities from YAML
+- weighted activity scoring
+- boolean activity scoring
+- incomplete boolean activities
+- invalid or empty YAML
+- catalog loading while skipping invalid activity files
 
+## Historical restoration
 
-Om Projektet
+This repository has been kept close to its original 2025 state.
 
-Detta projekt är starkt personligt inspirerat och reflekterar en strävan att integrera filosofi (Amor Fati - "älska ditt öde"), träning, medveten närvaro och datadriven utveckling i ett och samma system.
+The restoration made only small changes needed to make the implemented core
+usable and verifiable:
 
-Projektet utvecklas främst som ett showcase för personlig utveckling inom programmering, systemarkitektur och AI.
+- removed the accidentally committed virtual environment
+- added `.gitignore`
+- added tests for the implemented domain model
+- fixed the missing catalog logger
+- made empty YAML files fail cleanly instead of crashing catalog loading
+- preserved support for the older `value`-based boolean activity definitions
+- updated the Makefile for the `src/` package layout
+- documented which parts of the project were implemented and which remained
+  placeholders
+
+The unfinished CLI, repository, loader and separate score-calculator modules
+were intentionally not completed.
+
+## Project lineage
+
+1. `RUTINHANTERARE` — first routine tracker and scoring CLI, 2024
+2. `amor_fati` — YAML-driven activity and domain-model experiment, 2025
+3. `AmorFatiMVP` — later simplified event and logging model, 2025
+
+A later Django training-log experiment continued exploring the same general
+ideas.
+
+## Status
+
+Historical project preserved as the second stage of the Amor Fati project
+line.
